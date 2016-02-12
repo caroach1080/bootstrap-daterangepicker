@@ -365,7 +365,7 @@
             this.container.find('.calendar.left').show();
             this.container.find('.calendar.right').hide();
             this.container.find('.daterangepicker_input input, .daterangepicker_input i').hide();
-            if (!this.timePicker) {
+            if (!this.timePicker && this.singleDatePicker) {
                 this.container.find('.ranges').hide();
             }
         }
