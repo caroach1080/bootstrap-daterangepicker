@@ -46,6 +46,7 @@
         this.dateLimit = false;
         this.autoApply = false;
         this.singleDatePicker = false;
+        this.singleCalendar = false;
         this.showDropdowns = false;
         this.showWeekNumbers = false;
         this.timePicker = false;
@@ -231,6 +232,10 @@
                 this.endDate = this.startDate.clone();
         }
 
+        if (typeof options.singleCalendar === 'boolean') {
+            this.singleCalendar = options.singleCalendar;
+        }
+
         if (typeof options.timePicker === 'boolean')
             this.timePicker = options.timePicker;
 
@@ -277,7 +282,7 @@
                 if (split.length == 2) {
                     start = moment(split[0], this.locale.format);
                     end = moment(split[1], this.locale.format);
-                } else if (this.singleDatePicker && val !== "") {
+                } else if ((this.singleDatePicker || this.singleCalendar) && val !== "") {
                     start = moment(val, this.locale.format);
                     end = moment(val, this.locale.format);
                 }
@@ -354,7 +359,7 @@
             this.container.find('.applyBtn, .cancelBtn').addClass('hide');
         }
 
-        if (this.singleDatePicker) {
+        if (this.singleDatePicker || this.singleCalendar) {
             this.container.addClass('single');
             this.container.find('.calendar.left').addClass('single');
             this.container.find('.calendar.left').show();
@@ -736,7 +741,7 @@
             }
 
             html += '<th colspan="5" class="month">' + dateHtml + '</th>';
-            if ((!maxDate || maxDate.isAfter(calendar.lastDay)) && (!this.linkedCalendars || side == 'right' || this.singleDatePicker)) {
+            if ((!maxDate || maxDate.isAfter(calendar.lastDay)) && (!this.linkedCalendars || side == 'right' || this.singleDatePicker || this.singleCalendar)) {
                 html += '<th class="next available"><i class="fa fa-chevron-right glyphicon glyphicon-chevron-right"></i></th>';
             } else {
                 html += '<th></th>';
@@ -1285,7 +1290,7 @@
                 if (this.timePicker) {
                     var hour = parseInt(this.container.find('.left .hourselect').val(), 10);
                     if (!this.timePicker24Hour) {
-                        var ampm = this.container.find('.left .ampmselect').val();
+                        var ampm = cal.find('.ampmselect').val();
                         if (ampm === 'PM' && hour < 12)
                             hour += 12;
                         if (ampm === 'AM' && hour === 12)
