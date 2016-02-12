@@ -1287,6 +1287,7 @@
             //
 
             if (this.endDate || date.isBefore(this.startDate, 'day')) {
+                this.element.trigger('rangeStart.daterangepicker', this);
                 if (this.timePicker) {
                     var hour = parseInt(this.container.find('.left .hourselect').val(), 10);
                     if (!this.timePicker24Hour) {
@@ -1321,6 +1322,7 @@
                     date = date.clone().hour(hour).minute(minute).second(second);
                 }
                 this.setEndDate(date.clone());
+                this.element.trigger('rangeEnd.daterangepicker', this);
                 if (this.autoApply)
                     this.clickApply();
             }
