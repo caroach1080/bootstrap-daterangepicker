@@ -56,6 +56,7 @@
         this.linkedCalendars = true;
         this.autoUpdateInput = true;
         this.ranges = {};
+        this.showNonMonth = true;
 
         this.opens = 'right';
         if (this.element.hasClass('pull-right'))
@@ -267,6 +268,9 @@
 
         if (typeof options.isInvalidDate === 'function')
             this.isInvalidDate = options.isInvalidDate;
+
+        if (typeof options.showNonMonth === 'boolean')
+            this.showNonMonth = options.showNonMonth;
 
         // update day names order to firstDay
         if (this.locale.firstDay != 0) {
@@ -789,6 +793,11 @@
                 for (var col = 0; col < 7; col++) {
 
                     var classes = [];
+
+                    if (!this.showNonMonth && calendar[row][col].month() !== calendar[1][1].month()) {
+                        html += '<td class="nonmonth disabled" data-title="' + 'r' + row + 'c' + col + '"></td>';
+                        continue;
+                    }
 
                     //highlight today's date
                     if (calendar[row][col].isSame(new Date(), "day"))
