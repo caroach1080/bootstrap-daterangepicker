@@ -68,6 +68,8 @@
         this.buttonClasses = 'btn btn-sm';
         this.applyClass = 'btn-success';
         this.cancelClass = 'btn-default';
+        this.nextIconClasses = 'fa fa-chevron-right glyphicon glyphicon-chevron-right';
+        this.prevIconClasses = 'fa fa-chevron-left glyphicon glyphicon-chevron-left';
 
         this.locale = {
             format: 'MM/DD/YYYY',
@@ -222,6 +224,12 @@
 
         if (typeof options.buttonClasses === 'object')
             this.buttonClasses = options.buttonClasses.join(' ');
+
+        if (typeof options.nextIconClasses === 'string')
+            this.nextIconClasses = options.nextIconClasses;
+
+        if (typeof options.prevIconClasses === 'string')
+            this.prevIconClasses = options.prevIconClasses;
 
         if (typeof options.showDropdowns === 'boolean')
             this.showDropdowns = options.showDropdowns;
@@ -700,7 +708,7 @@
                 html += '<th></th>';
 
             if ((!minDate || minDate.isBefore(calendar.firstDay)) && (!this.linkedCalendars || side == 'left')) {
-                html += '<th class="prev available"><i class="fa fa-chevron-left glyphicon glyphicon-chevron-left"></i></th>';
+                html += '<th class="prev available"><i class="'+this.prevIconClasses+'"></i></th>';
             } else {
                 html += '<th></th>';
             }
@@ -742,7 +750,7 @@
 
             html += '<th colspan="5" class="month">' + dateHtml + '</th>';
             if ((!maxDate || maxDate.isAfter(calendar.lastDay)) && (!this.linkedCalendars || side == 'right' || this.singleDatePicker || this.singleCalendar)) {
-                html += '<th class="next available"><i class="fa fa-chevron-right glyphicon glyphicon-chevron-right"></i></th>';
+                html += '<th class="next available"><i class="'+this.nextIconClasses+'"></i></th>';
             } else {
                 html += '<th></th>';
             }
