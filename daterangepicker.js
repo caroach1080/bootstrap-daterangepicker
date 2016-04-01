@@ -1,5 +1,5 @@
 /**
-* @version: 2.1.18
+* @version: 2.1.19
 * @author: Dan Grossman http://www.dangrossman.info/
 * @copyright: Copyright (c) 2012-2015 Dan Grossman. All rights reserved.
 * @license: Licensed under the MIT license. See http://www.opensource.org/licenses/mit-license.php
@@ -102,7 +102,7 @@
         options = $.extend(this.element.data(), options);
 
         //html template for the picker UI
-        if (typeof options.template !== 'string' && !(options.template instanceof jQuery))
+        if (typeof options.template !== 'string' && !(options.template instanceof $))
             options.template = '<div class="daterangepicker dropdown-menu">' +
                 '<div class="calendar left">' +
                     '<div class="daterangepicker_input">' +
@@ -877,7 +877,7 @@
                     if (selected.isBefore(this.startDate))
                         selected = this.startDate.clone();
 
-                    if (selected.isAfter(maxDate))
+                    if (maxDate && selected.isAfter(maxDate))
                         selected = maxDate.clone();
 
                 }
