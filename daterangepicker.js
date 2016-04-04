@@ -1146,7 +1146,7 @@
                 e.type == "focusin" ||
                 target.closest(this.element).length ||
                 target.closest(this.container).length ||
-                target.closest('.calendar-table').length
+                target.closest('.table-condensed').length
                 ) return;
             this.hide();
         },
